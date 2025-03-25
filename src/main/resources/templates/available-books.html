@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Available Books</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<style>
+body {
+	background-color: lightblue;
+}
+
+.search-container {
+	max-width: 500px;
+	margin: 20px auto;
+}
+
+.search-input {
+	border-radius: 20px;
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+.search-button {
+	border-radius: 20px;
+	padding: 5px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+}
+
+.search-button:hover {
+	background-color: #0056b3;
+}
+
+.table-container {
+	margin: 20px auto;
+	max-width: 80%;
+}
+
+.table thead {
+	background-color: #002147;
+	color: white;
+}
+
+.table tbody {
+	background-color: white;
+	color: black;
+}
+
+.welcome-container {
+	display: flex;
+	align-items: center; /* Align items vertically */
+	gap: 5px; /* Space between "Welcome" and username */
+}
+
+.welcome-text {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.username-text {
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	margin-right: 10px; /* Adjust color if needed */
+}
+</style>
+</head>
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<!-- Left side: Home and Donate buttons -->
+
+			<a href="/books" class="text-white" style="text-decoration: none;">Home</a>
+
+			<a href="/books/new" class="text-white"
+				style="text-decoration: none;">Donate</a>
+
+
+			<div class="welcome-container">
+				<span style="color: white;" class="welcome-text">Welcome</span> <span
+					class="username-text" th:text="${username}"></span>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+
+
+
+
+		<h2 class="text-center mt-4">Available Books</h2>
+		<!-- Search Bar -->
+		<div class="search-container d-flex justify-content-center">
+			<form th:action="@{/books/search}" method="get" class="input-group"
+				style="max-width: 400px;">
+				<input type="text" name="title" class="form-control search-input"
+					placeholder="Search by Book Name">
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary search-button">Search</button>
+				</div>
+			</form>
+		</div>
+		<!-- Books Table -->
+		<div class="table-container">
+			<table class="table table-bordered text-center">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Author</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.title}"></td>
+						<td th:text="${book.author}"></td>
+						<td><a
+							th:href="@{/books/borrow/{userId}/{bookId}(userId=${session.loggedInUserId}, bookId=${book.id})}"
+							class="btn btn-primary"
+							th:attr="onclick=|return confirm('Do you want to borrow ' + '${book.title}' + '?');|">Borrow</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- Error Message -->
+			<p th:if="${error}" class="text-danger text-center mt-3"
+				th:text="${error}"></p>
+		</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Details</title>
+</head>
+<body>
+<h1>User Details</h1>
+<p>Username: <span th:text="${user.username}"></span></p>
+<p>password: <span th:text="${user.password}"></span></p>
+<a href="/admin">Back to Dashboard</a>
+</body>
+</html>

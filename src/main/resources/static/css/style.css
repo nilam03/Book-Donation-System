@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body {
+   background-color: #cce0f5; /* Light blue background */
+}
+.login-container {
+   background: white;
+   padding: 40px;
+   border-radius: 10px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.btn-custom {
+   background-color: #464866; /* Dark Blue Button */
+   color: white;
+   width: 100%;
+}
+

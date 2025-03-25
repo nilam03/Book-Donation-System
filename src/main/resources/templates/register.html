@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-4">
+		<h2>Register for Book Donation Campaign</h2>
+		<p style="color: red;" th:if="${error}" th:text="${error}"></p>
+		
+		
+		<form action="/register" method="post" th:object="${user}">
+			<!-- Username -->
+			<div class="mb-3">
+				<label for="username" class="form-label">Username:</label> <input
+					type="text" id="username" th:field="*{username}"
+					class="form-control" required>
+			</div>
+			<!-- Email Address -->
+			<div class="mb-3">
+				<label for="email" class="form-label">Email Address:</label> <input
+					type="email" id="email" th:field="*{email}" class="form-control"
+					required>
+			</div>
+			<!-- Password -->
+			<div class="mb-3">
+				<label for="password" class="form-label">Password:</label> <input
+					type="password" id="password" th:field="*{password}"
+					class="form-control" required> 
+			</div>
+			<!-- Confirm Password -->
+			<div class="mb-3">
+				<label for="confirmPassword" class="form-label">Confirm
+					Password:</label> <input type="password" id="confirmPassword"
+					name="confirmPassword" class="form-control" required>
+			</div>
+			<!-- Submit Button -->
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+
+	</div>
+</body>
+</html>
